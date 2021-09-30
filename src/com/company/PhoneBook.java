@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PhoneBook {
 
@@ -19,7 +20,8 @@ public class PhoneBook {
     }
 
     public void updateRecord(Record record) throws RecordNotFound, RecordNotValid{
-        if(record.getName().isEmpty() | record.getPhoneNum().isEmpty()){
+        if(record.getName().isEmpty() || record.getPhoneNum().isEmpty() ||
+                record.getName().equals("") || record.getPhoneNum().equals("")){
             throw new RecordNotValid();
         }else if(!this.checkUser(record.getId())){
             throw new RecordNotFound();
@@ -42,7 +44,7 @@ public class PhoneBook {
 
     private boolean checkRecord(String num){
         for(Record rec: this.phoneUsers){
-            if(rec.getPhoneNum() == num){
+            if(Objects.equals(rec.getPhoneNum(), num)){
                 return true;
             }
         }
